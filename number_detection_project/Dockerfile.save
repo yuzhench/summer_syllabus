@@ -1,0 +1,23 @@
+#use the ubuntu 20.04 with the cuda as the base image 
+FROM nvidia/cuda:12.1.0-cudnn8-devel-ubuntu20.04
+#use the python3 
+RUN apt-get install python3  
+
+#set the user 
+RUN useradd -m -s /bin/bash yuzhen \ &&
+	apt-get install vim nano curl sudo cmake 
+#specify the user
+USR yuzhen 
+
+#set the working space 
+WORKDIR /yuzhen
+
+#copy the files to the container folders 
+#copy the code
+COPY ../model.py mnist_number_detection.py /home/yuzhen/code/
+# copy the requirnment 
+COPY requirements.txt /home/yuzhen/util
+/
+#environment 
+ENV MEANING = learn_how_to_write_dockerfile 
+

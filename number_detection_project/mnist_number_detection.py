@@ -49,13 +49,13 @@ print ("the device currently use is: ", device)
 network = model.cnn_model() 
 
 #move the model to the GPU 
-network.to(device)
+network#.to(device)
 
 # initialize the optimizer  
 # the "momentum" here means we will not only concider the current gradient vecrior, but also the accumulated gradient.
 # advantage of the momentum: 
 #   1. move in the same direction as the previous iteration
-#   2, faster convergence 
+#   2, faster convergence
 #   3. less oscillations more smooth 
 optimizer = optim.SGD(params=network.parameters(), lr=learning_rate, momentum=0.9) 
 
@@ -71,8 +71,8 @@ def train(epoch):
     network.train()# show we are in the trainning mode right now 
     for batch_idx, (data, target) in enumerate(train_loader):
         #in order to use GPU to calcuate, move the data and target to the GPU:
-        data = data.to(device)
-        target = target.to(device)
+        data = data#.to(device)
+        target = target#.to(device)
         
         #STEP1: reset the optimizer:
         optimizer.zero_grad()

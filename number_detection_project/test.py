@@ -20,7 +20,7 @@ test_loader = torch.utils.data.DataLoader(test_dataset,batch_size=batch_size_tes
 ## initialize the model from the model file 
 network = model.cnn_model()
 ## feed in the parameters to the model from the pth file 
-network.load_state_dict(torch.load(model_save_dir))
+network.load_state_dict(torch.load(model_save_dir,map_location='cpu'))
 network.eval()
 
 correct_prediction = 0
