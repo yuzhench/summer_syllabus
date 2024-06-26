@@ -1,0 +1,374 @@
+# Install CUDA
+# https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_network
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
+sudo apt install ./cuda-keyring_1.1-1_all.deb
+sudo apt-get update
+sudo apt-get -y install cuda
+rm cuda-keyring_1.1-1_all.deb
+
+### Into ~/.bashrc
+# Add NVCC to path
+export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+
+# Add local bin to path
+export PATH=$HOME/.local/bin${PATH:+:${PATH}}
+
+# Install Docker
+# https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#installing-on-ubuntu-and-debian
+curl https://get.docker.com | sh && sudo systemctl --now enable docker
+
+# Add docker user so you don't have to sudo everytime
+# https://explainshell.com/
+sudo usermod -aG docker adamli
+
+# Install nvidia-docker2
+# Based on the following, but install nvidia-docker2 instead of nvidia-container-toolkit
+# https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installing-with-apt
+# For linux mint, change the first line to the respective ubuntu distribution (ubuntu22.04 for lm21.2)
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+      && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+      && curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
+            sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+            sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+sudo apt-get update
+sudo apt-get install -y nvidia-docker2
+
+# Restart docker
+sudo systemctl restart docker
+
+# Install VS code with apt
+# Download the following and just install with the software package manager
+# It will install the repo for you
+# https://code.visualstudio.com/docs/?dv=linux64_deb
+# *I recommend using apt/deb to install most things instead of snap
+
+# I expanded your swapfile to 32GiB already
+# If you want to setup hibernate, you can follow:
+# https://askubuntu.com/a/1321773
+
+# If you want to make windows default
+# https://askubuntu.com/questions/100232/how-do-i-change-the-grub-boot-order#comment280266_110738
+
+# For the fans, I did the first step here and made the sensor module detectable
+# https://askubuntu.com/a/1094617
+# That means I also installed the lm-sensors package
+# I didn't do anything after inside of or after the `To take over control of your fans` header
+
+# Miniconda
+# Don't setup to permanently initialize
+# https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+### The below all go into ~/conda_source
+# Reset all source
+source /etc/bash.bashrc
+source ~/.bashrc
+
+# Setup conda
+eval "$(/home/adamli/miniconda3/bin/conda shell.bash hook)"
+###
+
+### The below goes into vscode User settings
+{
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "python.condaPath": "/home/adamli/miniconda3/bin/conda",
+    "terminal.integrated.profiles.linux": {
+        "conda-bash": {
+            "path": "bash",
+            "icon": "terminal-bash",
+            "args": ["--rcfile", "~/conda_source"]
+        }
+    },
+}
+###
+
+### The below goes in the .vscode/settings.json for any python project
+{
+    "terminal.integrated.defaultProfile.linux": "conda-bash"
+}
+###
+
+## MKL Workaround
+## in ~/.bashrc, from https://danieldk.eu/Posts/2020-08-31-MKL-Zen.html
+export LD_PRELOAD=/home/adam/mkl_intel_test/libfakeintel.so${LD_PRELOAD:+:${LD_PRELOAD}}
+
+### IPOPT
+sudo apt-get update
+sudo apt-get install libgomp1 liblapack3 libblas3 libmetis5
+sudo apt-get install build-essential gcc g++ gfortran git patch wget \
+       pkg-config liblapack-dev libblas-dev libmetis-dev \
+       apt-utils
+cd /tmp
+wget https://github.com/coin-or/Ipopt/archive/refs/tags/releases/3.14.10.tar.gz
+tar xvf ./3.14.10.tar.gz && mv Ipopt-releases-3.14.10 /tmp/ipopt
+cd /tmp/ipopt
+#HSL
+git clone --depth 1 --branch releases/2.2.1 https://github.com/coin-or-tools/ThirdParty-HSL.git
+cd /tmp/ipopt/ThirdParty-HSL
+tar xvf ./coinhsl.tar.gz
+mv $(ls -d coinhsl*/) coinhsl
+./configure --prefix=/opt/hsl
+make -j$(nproc)
+sudo make install
+find /opt/hsl/lib/libcoinhsl.* | xargs -I{} echo {} {} | sed "s/coin//2" | sudo xargs -n 2 ln -s
+sudo ln -s /opt/hsl/lib/pkgconfig/coinhsl.pc /opt/hsl/lib/pkgconfig/hsl.pc
+#IPOPT
+cd /tmp/ipopt
+mkdir build
+cd build
+../configure --prefix=/opt/ipopt
+make -j$(nproc)
+sudo make install
+    
+## In ~/.bashrc
+export IPOPT_HOME=/opt/ipopt
+export LD_LIBRARY_PATH=${IPOPT_HOME}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PKG_CONFIG_PATH=${IPOPT_HOME}/lib/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
+export C_INCLUDE_PATH=${IPOPT_HOME}/include/coin-or${C_INCLUDE_PATH:+:${C_INCLUDE_PATH}}
+export HSL_HOME=/opt/hsl
+export LD_LIBRARY_PATH=${HSL_HOME}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PKG_CONFIG_PATH=${HSL_HOME}/lib/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}
+export C_INCLUDE_PATH=${HSL_HOME}/include/coin-or${C_INCLUDE_PATH:+:${C_INCLUDE_PATH}}
+
+# Managing multiple ssh keys for github
+# ~/.ssh/config
+# Default Account
+Host github.com
+  ...
+  IdentityFile ~/.ssh/github_user1
+
+# Account 1
+Host user1.github.com
+  HostName github.com
+  ...
+  IdentityFile ~/.ssh/github_user1
+
+# Account 2
+Host user2.github.com
+  HostName github.com
+  ...
+  IdentityFile ~/.ssh/github_user2
+
+# If adding to ssh-agent, need this to prevent using preloaded keys
+Host *
+  IdentitiesOnly=yes
+##
+# when cloning, use git@user1.github.com instead of git@github.com
+# otherwise note from https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+### Fusion 360
+# Force the user-agent to use windows and download from https://www.autodesk.com/products/fusion-360/appstream
+# install steam and proton-caller
+sudo apt-get install steam proton-caller
+### Configure -> ~/.config/proton.conf
+data = "/home/adam/proton-data/"
+steam = "/home/adam/.steam/steam/"
+
+# optional
+common = "/home/adam/.steam/steam/steamapps/common/"
+### Create the folder
+mkdir ~/proton-data
+# then launch steam to install proton-experimental
+proton-call -p Experimental -r Fusion\ Client\ Downloader.exe
+# make shortcut or desktop with the following non-terminal launch
+proton-call -p Experimental -r /home/adam/proton-data/Proton\ Experimental/pfx/drive_c/users/steamuser/Desktop/Autodesk\ Fusion\ 360.lnk
+
+######## MAC OS stuff
+# Note that anything that's LD_LIBRARY_PATH is DYLD_[FALLBACK]_LIBRARY_PATH
+# Also note that it has security restrictions & env is a security restricted thingy
+# see https://github.com/Homebrew/brew/issues/13481
+
+# For basic xcode command line compiler
+xcode-select --install # Install Command Line Tools
+sudo xcode-select --switch /Library/Developer/CommandLineTools # Enable Command Line Tools
+# After, if using the full xcode compiler
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+
+## Things to install
+firefox
+spotify
+homebrew
+discord
+slack
+vs code
+matlab (min 2023b)
+
+# Discord ptb package uses osx not mac
+
+## To make sure brew packages can be found during compilation, in .zshrc
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export CPATH="/opt/homebrew/include${CPATH:+:${CPATH}}"
+export LIBRARY_PATH="/opt/homebrew/lib${LIBRARY_PATH:+:${LIBRARY_PATH}}"
+##
+
+## If installing eigen, add link for packages which use Eigen directly. So do either of the following (first may be better)
+# add to .zshrc
+export CPLUS_INCLUDE_PATH="${CPATH:+${CPATH}:}/opt/homebrew/include/eigen3"
+# run
+sudo ln -s /opt/homebrew/include/eigen3/Eigen /opt/homebrew/include/Eigen
+##
+
+# Add MATLAB to the path as a command line option
+export PATH=/Applications/MATLAB_R2023b.app/bin/${PATH:+:${PATH}}
+
+# Brew packages useful
+wget # download crap
+battery # battery charge limiter to 80%
+cmake # cmake
+eigen # if eigen is needed, see above
+metis # for ipopt, others aren't needed
+boost # as always
+###
+use `make -j$(sysctl -n hw.physicalcpu)`
+
+### The below go into ~/conda_source
+# Get current terminal
+CUR_SHELL=$(echo $SHELL | sed 's/.*\///')
+#CUR_SHELL=$(echo $0 | sed 's/.*\///')
+if [ "x$CUR_SHELL" = "x" ]; then
+  CUR_SHELL=$(ps -cp $$ | awk 'END{print $NF}')
+fi
+
+# Reset all source
+source /etc/${CUR_SHELL}rc
+source ~/.${CUR_SHELL}rc 2>/dev/null
+
+# Setup conda
+eval "$(/Users/adam/miniconda3/bin/conda shell.${CUR_SHELL} hook)"
+###
+
+## Also make a folder for the new zshrc for code
+~/miniconda/zshrc
+|__ .zshrc
+|__ .zshenv
+|__ .zsh_history -> ~/.zsh_history
+\__ .zsh_sessions/ -> ~/.zsh_sessions/
+
+### .zshrc
+source ~/conda_source
+### .zshenv
+source ~/.zshenv 2>/dev/null
+###
+
+### The below go into vs code user settings
+{
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "python.condaPath": "/Users/adam/miniconda3/bin/conda",
+    "python.defaultInterpreterPath": "/Users/adam/miniconda3/bin/python",
+    "terminal.integrated.profiles.osx": {
+        "conda-zsh": {
+            "path": "zsh",
+            "args": ["-c", "ZDOTDIR=~/miniconda3/zshrc zsh"],
+            "icon": "terminal-bash"
+        },
+        "conda-bash": {
+            "path": "bash",
+            "args": ["--rcfile", "~/conda_source"],
+            "icon": "terminal-bash"
+        },
+    }
+}
+###
+
+### The below goes in the .vscode/settings.json for any python project
+{
+    "terminal.integrated.defaultProfile.osx": "conda-zsh"
+}
+###
+
+# Easier docker on Mac using Lima
+# References https://itnext.io/replace-docker-desktop-with-lima-88ec6f9d6a19
+# https://gist.github.com/akrylysov/7c1ea3bac409da2758e525f2f82e6373
+brew install lima docker docker-buildx docker-credential-helper docker-compose #(if wanted)
+
+# if docker compose
+# Link docker-compose plugin
+mkdir -p ~/.docker/cli-plugins
+ln -sfn /opt/homebrew/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose
+
+# Continue later
+
+### UTM VM's
+# Install UTM
+# Download Ubuntu Server for ARM
+# Create a new VM -> User Apple Virtualization & Enable Rosetta
+# 32G and 8 cores
+# 64G disk
+# Share "~/VM Shared Folder"
+# Install as normal
+# add clipboard, cinnamon
+sudo apt install spice-vdagent cinnamon gdebi binfmt-support
+# configure lightdm
+wget https://raw.githubusercontent.com/canonical/lightdm/main/data/lightdm.conf
+sudo mv lightdm.conf /etc/lightdm/lightdm.conf
+# In the [Seat:*] section, set user-session=cinnamon
+# make sure to delete ~/.dmrc (if login was attempted before this to reset the user-session config)
+# uninstall all snaps (has to be done in order)
+sudo snap remove lxd && sudo snap remove core20 && sudo snap remove snapd
+sudo apt-get remove --purge snapd
+rm -rf ~/s
+sudo rm -rf /snap
+sudo rm -rf /var/snap
+sudo rm -rf /var/lib/snapd
+# Block snap
+#### in /etc/apt/preferences.d/nosnap.pref
+# To prevent repository packages from triggering the installation of Snap,
+# this file forbids snapd from being installed by APT.
+# For more information: https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html
+
+Package: snapd
+Pin: release a=*
+Pin-Priority: -10
+####
+# and get firefox back
+sudo add-apt-repository ppa:mozillateam/ppa
+### in /etc/apt/preferences.d/mozilla-firefox.pref
+Package: *
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 1001
+###
+sudo apt-get update
+sudo apt-get install firefox
+# get the debs from http://packages.linuxmint.com/list.php?release=victoria
+# * update the release name to match the latest
+# and install mint-x-icons mint-y-icons mint-themes mint-cursor-themes
+# in fstab, remove swap, add share & rosetta, and symlink subfolder of share
+# Also delete /swap.img
+# enable rosetta from here https://docs.getutm.app/advanced/rosetta/
+# add multiarch
+sudo dpkg --add-architecture amd64
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.d/amd64-ubuntu.list
+# edit file to remove all comments, change the uri, and add [arch=amd64] like follows
+deb [arch=amd64] http://us.archive.ubuntu.com/ubuntu/ focal main restricted
+# do the same thing back to the regular sources.list, but for arm64 and without changing the URL
+# disable suspend in the vm
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
+### Making homebrew apps accessible by spotlight
+# Automator -> Application -> Run Shell Script
+## eval "$(/opt/homebrew/bin/brew shellenv)"
+## command-of-choice-to-launch
+# Save to Applications & drag in appropriate icon
+
+## DESTROY DS_STORE
+# This thing leaves annoying files and stuff on external filesystems
+# disable for network shares
+# https://support.apple.com/en-us/HT208209
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+# disable for usb drives
+# https://ss64.com/osx/syntax-defaults.html
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool TRUE
+# FIGURE OUT HOW TO DISABLE FOR ZIPS
+# restart system / log off then back on for the above to take effect
+
+# Show hidden files in Finder
+# https://macos-defaults.com/finder/appleshowallfiles.html
+defaults write com.apple.finder "AppleShowAllFiles" -bool "true"
+# Show all extensions in Finder
+defaults write NSGlobalDomain "AppleShowAllExtensions" -bool "true"
+# restart Finder for the above to take effect
+killall Finder
+
+# keep spotlight out of volumes
+# https://apple.stackexchange.com/a/37701
