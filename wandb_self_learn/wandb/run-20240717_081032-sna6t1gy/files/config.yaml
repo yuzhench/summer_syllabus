@@ -1,0 +1,29 @@
+_wandb:
+    value:
+        cli_version: 0.17.4
+        python_version: 3.10.14
+        t:
+            1:
+                - 55
+            2:
+                - 55
+            3:
+                - 2
+                - 13
+                - 16
+                - 23
+                - 55
+            4: 3.10.14
+            5: 0.17.4
+            8:
+                - 5
+            12: 0.17.4
+            13: linux-x86_64
+architecture:
+    value: CNN
+dataset:
+    value: CIFAR-100
+epochs:
+    value: 10
+learning_rate:
+    value: 0.02

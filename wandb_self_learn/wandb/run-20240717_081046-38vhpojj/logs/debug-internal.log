@@ -1,0 +1,16 @@
+{"time":"2024-07-17T08:10:46.145735472-04:00","level":"INFO","msg":"using version","core version":"0.17.4"}
+{"time":"2024-07-17T08:10:46.145744789-04:00","level":"INFO","msg":"created symlink","path":"/home/yuzhen/Desktop/ml_learn/wandb_self_learn/wandb/run-20240717_081046-38vhpojj/logs/debug-core.log"}
+{"time":"2024-07-17T08:10:46.170517139-04:00","level":"INFO","msg":"created new stream","id":"38vhpojj"}
+{"time":"2024-07-17T08:10:46.170562434-04:00","level":"INFO","msg":"handler: started","stream_id":{"value":"38vhpojj"}}
+{"time":"2024-07-17T08:10:46.170582081-04:00","level":"INFO","msg":"sender: started","stream_id":{"value":"38vhpojj"}}
+{"time":"2024-07-17T08:10:46.170596017-04:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"38vhpojj"}}
+{"time":"2024-07-17T08:10:47.225671531-04:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-07-17T08:10:47.268810175-04:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-07-17T08:10:48.271439391-04:00","level":"INFO","msg":"sender: getServerInfo: got server info","serverInfo":{"cliVersionInfo":{"max_cli_version":"0.17.4","min_cli_version":"0.8.20"},"latestLocalVersionInfo":null}}
+{"time":"2024-07-17T08:10:48.272072036-04:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-07-17T08:10:48.273281571-04:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-07-17T08:10:48.524526019-04:00","level":"WARN","msg":"No job ingredients found, not creating job artifact"}
+{"time":"2024-07-17T08:10:48.524544193-04:00","level":"WARN","msg":"No source type found, not creating job artifact"}
+{"time":"2024-07-17T08:10:48.524552057-04:00","level":"INFO","msg":"sender: sendDefer: no job artifact to save"}
+{"time":"2024-07-17T08:10:53.082934668-04:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"38vhpojj"}}
+{"time":"2024-07-17T08:10:53.082958142-04:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"38vhpojj"}}

@@ -1,0 +1,128 @@
+{
+    "os": "Linux-5.15.0-113-generic-x86_64-with-glibc2.31",
+    "python": "3.10.14",
+    "heartbeatAt": "2024-07-17T12:08:54.070656",
+    "startedAt": "2024-07-17T12:07:37.314304",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/yuzhen/Desktop/ml_learn/wandb_self_learn/test.py",
+    "codePathLocal": "test.py",
+    "codePath": "wandb_self_learn/test.py",
+    "git": {
+        "remote": null,
+        "commit": "dc19bfb62958345ad8e876dda65cd20a10c22661"
+    },
+    "email": "yuzhench@umich.edu",
+    "root": "/home/yuzhen/Desktop/ml_learn",
+    "host": "yuzhen-Alienware-m15-R7-AMD",
+    "username": "yuzhen",
+    "executable": "/home/yuzhen/Desktop/ENTER/envs/sparrows/bin/python3",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 1975.87075,
+        "min": 1600.0,
+        "max": 3300.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1600.0,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 1600.0,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 3300.0,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 1600.0,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 3126.442,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 1600.0,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 1600.0,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 1800.0,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 1800.0,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 1600.0,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 3684.903,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 1600.0,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 1800.0,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 2061.446,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 1800.0,
+            "min": 1600.0,
+            "max": 3300.0
+        },
+        {
+            "current": 1800.0,
+            "min": 1600.0,
+            "max": 3300.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 915.8154449462891,
+            "used": 720.099910736084
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3080 Ti Laptop GPU",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3080 Ti Laptop GPU",
+            "memory_total": 17179869184
+        }
+    ],
+    "memory": {
+        "total": 30.58127212524414
+    }
+}

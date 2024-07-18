@@ -1,0 +1,14 @@
+{"time":"2024-07-17T07:59:51.322182431-04:00","level":"INFO","msg":"using version","core version":"0.17.4"}
+{"time":"2024-07-17T07:59:51.322193441-04:00","level":"INFO","msg":"created symlink","path":"/home/yuzhen/Desktop/ml_learn/wandb_self_learn/wandb/run-20240717_075951-xjbr85ho/logs/debug-core.log"}
+{"time":"2024-07-17T07:59:53.180282085-04:00","level":"INFO","msg":"created new stream","id":"xjbr85ho"}
+{"time":"2024-07-17T07:59:53.180394736-04:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"xjbr85ho"}}
+{"time":"2024-07-17T07:59:53.180377423-04:00","level":"INFO","msg":"handler: started","stream_id":{"value":"xjbr85ho"}}
+{"time":"2024-07-17T07:59:53.180429039-04:00","level":"INFO","msg":"sender: started","stream_id":{"value":"xjbr85ho"}}
+{"time":"2024-07-17T08:01:21.35042141-04:00","level":"ERROR","msg":"sender: sendRun:","error":"failed to upsert bucket: api: failed sending: POST https://api.wandb.ai/graphql giving up after 3 attempt(s): context canceled"}
+{"time":"2024-07-17T08:01:23.354972513-04:00","level":"ERROR","msg":"sender: sendConfig:","error":"api: failed sending: POST https://api.wandb.ai/graphql giving up after 1 attempt(s): context canceled"}
+{"time":"2024-07-17T08:01:23.355194127-04:00","level":"WARN","msg":"No requirements.txt found, not creating job artifact. See https://docs.wandb.ai/guides/launch/create-job"}
+{"time":"2024-07-17T08:01:23.355208844-04:00","level":"INFO","msg":"sender: sendDefer: no job artifact to save"}
+{"time":"2024-07-17T08:01:23.405355726-04:00","level":"ERROR","msg":"runfiles: CreateRunFiles returned error: api: failed sending: POST https://api.wandb.ai/graphql giving up after 1 attempt(s): context canceled"}
+{"time":"2024-07-17T08:01:23.406156391-04:00","level":"INFO","msg":"sender: closed","stream_id":{"value":"xjbr85ho"}}
+{"time":"2024-07-17T08:01:23.406147905-04:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"xjbr85ho"}}
+{"time":"2024-07-17T08:01:23.406212886-04:00","level":"INFO","msg":"closed stream","id":"xjbr85ho"}

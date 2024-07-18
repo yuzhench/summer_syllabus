@@ -1,0 +1,87 @@
+
+Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz
+Failed to download (trying next):
+HTTP Error 403: Forbidden
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz to ./MNIST/raw/train-images-idx3-ubyte.gz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100%|█████████▉| 9863168/9912422 [01:28<00:00, 49524.30it/s]
+Extracting ./MNIST/raw/train-images-idx3-ubyte.gz to ./MNIST/raw
+
+100%|██████████| 9912422/9912422 [01:30<00:00, 109925.32it/s]
+Failed to download (trying next):
+HTTP Error 403: Forbidden
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz to ./MNIST/raw/train-labels-idx1-ubyte.gz
+Extracting ./MNIST/raw/train-labels-idx1-ubyte.gz to ./MNIST/raw
+Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz
+100%|██████████| 28881/28881 [00:00<00:00, 61360.25it/s]
+Failed to download (trying next):
+HTTP Error 403: Forbidden
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz to ./MNIST/raw/t10k-images-idx3-ubyte.gz
+
+
+ 72%|███████▏  | 1179648/1648877 [00:05<00:01, 388491.99it/s]
+Extracting ./MNIST/raw/t10k-images-idx3-ubyte.gz to ./MNIST/raw
+
+100%|██████████| 1648877/1648877 [00:06<00:00, 259100.97it/s]
+Failed to download (trying next):
+HTTP Error 403: Forbidden
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz to ./MNIST/raw/t10k-labels-idx1-ubyte.gz
+Extracting ./MNIST/raw/t10k-labels-idx1-ubyte.gz to ./MNIST/raw
+100%|██████████| 4542/4542 [00:00<00:00, 2655496.06it/s]
+Train Loss: 0.285, Valid Loss: 0.284231, Accuracy: 0.92
+Train Loss: 0.148, Valid Loss: 0.231638, Accuracy: 0.92
+Train Loss: 0.170, Valid Loss: 0.199018, Accuracy: 0.94
+Train Loss: 0.139, Valid Loss: 0.188492, Accuracy: 0.95
+Train Loss: 0.060, Valid Loss: 0.186637, Accuracy: 0.95
+Train Loss: 0.103, Valid Loss: 0.165954, Accuracy: 0.95
+Train Loss: 0.039, Valid Loss: 0.164446, Accuracy: 0.95
+Train Loss: 0.054, Valid Loss: 0.163102, Accuracy: 0.96
+Train Loss: 0.100, Valid Loss: 0.158476, Accuracy: 0.95
+Train Loss: 0.034, Valid Loss: 0.155661, Accuracy: 0.95

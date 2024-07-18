@@ -1,0 +1,7 @@
+{"time":"2024-07-17T07:55:16.566331329-04:00","level":"INFO","msg":"using version","core version":"0.17.4"}
+{"time":"2024-07-17T07:55:16.566355934-04:00","level":"INFO","msg":"created symlink","path":"/home/yuzhen/Desktop/ml_learn/wandb_self_learn/wandb/run-20240717_075516-3jcmf6fn/logs/debug-core.log"}
+{"time":"2024-07-17T07:55:18.465804241-04:00","level":"INFO","msg":"created new stream","id":"3jcmf6fn"}
+{"time":"2024-07-17T07:55:18.46585792-04:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"3jcmf6fn"}}
+{"time":"2024-07-17T07:55:18.465878779-04:00","level":"INFO","msg":"handler: started","stream_id":{"value":"3jcmf6fn"}}
+{"time":"2024-07-17T07:55:18.46587911-04:00","level":"INFO","msg":"sender: started","stream_id":{"value":"3jcmf6fn"}}
+{"time":"2024-07-17T07:56:46.641074197-04:00","level":"ERROR","msg":"sender: sendRun:","error":"failed to upsert bucket: api: failed sending: POST https://api.wandb.ai/graphql giving up after 3 attempt(s): context canceled"}

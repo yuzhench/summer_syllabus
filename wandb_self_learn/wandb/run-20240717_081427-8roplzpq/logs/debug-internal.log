@@ -1,0 +1,9 @@
+{"time":"2024-07-17T08:14:27.873916637-04:00","level":"INFO","msg":"using version","core version":"0.17.4"}
+{"time":"2024-07-17T08:14:27.87392892-04:00","level":"INFO","msg":"created symlink","path":"/home/yuzhen/Desktop/ml_learn/wandb_self_learn/wandb/run-20240717_081427-8roplzpq/logs/debug-core.log"}
+{"time":"2024-07-17T08:14:27.875691813-04:00","level":"INFO","msg":"created new stream","id":"8roplzpq"}
+{"time":"2024-07-17T08:14:27.875728231-04:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"8roplzpq"}}
+{"time":"2024-07-17T08:14:27.87572753-04:00","level":"INFO","msg":"handler: started","stream_id":{"value":"8roplzpq"}}
+{"time":"2024-07-17T08:14:27.875738451-04:00","level":"INFO","msg":"sender: started","stream_id":{"value":"8roplzpq"}}
+{"time":"2024-07-17T08:14:29.037358156-04:00","level":"INFO","msg":"wandb-core","!BADKEY":null}
+{"time":"2024-07-17T08:14:29.081109233-04:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-07-17T08:14:32.096824495-04:00","level":"INFO","msg":"sender: getServerInfo: got server info","serverInfo":{"cliVersionInfo":{"max_cli_version":"0.17.4","min_cli_version":"0.8.20"},"latestLocalVersionInfo":null}}

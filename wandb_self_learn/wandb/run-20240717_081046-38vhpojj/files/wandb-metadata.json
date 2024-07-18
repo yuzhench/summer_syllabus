@@ -1,0 +1,39 @@
+{
+  "os":  "Linux-5.15.0-113-generic-x86_64-with-glibc2.31",
+  "python":  "3.10.14",
+  "startedAt":  "2024-07-17T12:10:46.145866Z",
+  "program":  "/home/yuzhen/Desktop/ml_learn/wandb_self_learn/test.py",
+  "codePath":  "wandb_self_learn/test.py",
+  "git":  {
+    "commit":  "dc19bfb62958345ad8e876dda65cd20a10c22661"
+  },
+  "email":  "yuzhench@umich.edu",
+  "root":  "/home/yuzhen/Desktop/ml_learn/wandb_self_learn",
+  "host":  "yuzhen-Alienware-m15-R7-AMD",
+  "username":  "yuzhen",
+  "executable":  "/home/yuzhen/Desktop/ENTER/envs/sparrows/bin/python3",
+  "codePathLocal":  "test.py",
+  "cpu_count":  8,
+  "cpu_count_logical":  16,
+  "gpu":  "[NVIDIA GeForce RTX 3080 Ti Laptop GPU]",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "983349346304",
+      "used":  "773201661952"
+    }
+  },
+  "memory":  {
+    "total":  "32836390912"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  16
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA GeForce RTX 3080 Ti Laptop GPU",
+      "memoryTotal":  "17179869184"
+    }
+  ]
+}
